@@ -1,2 +1,2 @@
-# marketing
+# marketingapp
 A JavaScript project
