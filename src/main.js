@@ -37,9 +37,17 @@ client.initialize().catch(err => {
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    const qrImageBuffer = qrImage.imageSync(qrCodeData, { type: 'png' });
-    res.writeHead(200, { 'Content-Type': 'image/png' });
-    res.end(qrImageBuffer);
+    console.log('BEFORE IMAGE SYNC');
+    try {
+
+        const qrImageBuffer = qrImage.imageSync(qrCodeData, { type: 'png' });
+        console.log('AFTER IMAGE SYNC');
+        console.log(qrImageBuffer);
+        res.writeHead(200, { 'Content-Type': 'image/png' });
+        res.end(qrImageBuffer);
+    } catch {
+        res.end({ "message": "something went wrong" },);
+    }
 });
 
 app.post('/send-message', async (req, res) => {
